@@ -40,7 +40,7 @@ GSEAplots= function(input.ds.name="",
                     color_line="black",
                     color_tick="black",
                     abs.val=F,
-                    gs.size.threshold.max=1000,
+                    gs.size.threshold.max=9999999999,
                     gs.size.threshold.min=2)
 {
   # GSEA 1.0 -- Gene Set Enrichment Analysis / Broad Institute

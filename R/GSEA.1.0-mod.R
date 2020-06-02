@@ -324,7 +324,7 @@ GSEA.EnrichmentScore <- function(gene.list, gene.set, weighted.score.type = 1, c
   }
   alpha <- weighted.score.type
   correl.vector <- abs(correl.vector**alpha)
-  sum.correl.tag    <- sum(correl.vector[tag.indicator == 1]) #kelsie - here it is equaling numereic 0
+  sum.correl.tag    <- sum(correl.vector[tag.indicator == 1])
   norm.tag    <- 1.0/sum.correl.tag
   norm.no.tag <- 1.0/Nm
   RES <- cumsum(tag.indicator * correl.vector * norm.tag - no.tag.indicator * norm.no.tag)
@@ -814,8 +814,8 @@ GSEA <- function(
   fdr.q.val.threshold = 0.25,
   topgs = 10,
   adjust.FDR.q.val = F,
-  gs.size.threshold.min = 25,
-  gs.size.threshold.max = 500,
+  gs.size.threshold.min = 2,
+  gs.size.threshold.max = 9999999999,
   reverse.sign = F,
   preproc.type = 0,
   random.seed = 123456,
@@ -1076,6 +1076,8 @@ GSEA <- function(
   for (i in 1:max.Ng) {
     temp.size.G[i] <- length(unlist(strsplit(temp[[i]], "\t"))) - 2
   }
+  longsest.gs <- max(temp.size.G)
+  gs.size.threshold.max <- longest.gs + 9999999999
 
   max.size.G <- max(temp.size.G)
   gs <- matrix(rep("null", max.Ng*max.size.G), nrow=max.Ng, ncol= max.size.G)
@@ -1084,7 +1086,6 @@ GSEA <- function(
   gs.count <- 1 #was 1
   gene.set.reference<- vector(length = max.Ng, mode = "character")
   gene.set.reference.matrix <- rep(list(NA),max.Ng)
-  kelscount <- 0
   for (i in 1:max.Ng) { #for(i in i:210)
     gene.set.size <- length(unlist(strsplit(temp[[i]], "\t"))) - 2 #counts separates string of genes
     gs.line <- noquote(unlist(strsplit(temp[[i]], "\t"))) #if i=210, gs.line= FAM48A NA TAX1BP1
@@ -1100,7 +1101,6 @@ GSEA <- function(
     set.size <- length(existing.set[existing.set == T]) #how many "TRUE" in existing.set
     #removes genesets that do not fit the size requirements
     if ((set.size < gs.size.threshold.min) || (set.size > gs.size.threshold.max)){ # if((1 < 15)||(1 > 999999)) NOTE: 15 and 999999 are the set min and max
-      kelscount = kelscount+1
       next}
     temp.size.G[gs.count] <- set.size
     gs[gs.count,] <- c(gene.set.tags[existing.set], rep("null", max.size.G - temp.size.G[gs.count])) # at row number gs.count (in this case 210) of gs, all of the gene.set.tags are added, then the rest are filled with "null"
@@ -1125,7 +1125,7 @@ GSEA <- function(
 
   N <- length(A[,1])
   Ns <- length(A[1,])
-  print(c("kelscount: ", kelscount))
+  print(c("gs.size.threshold.max: ", gs.size.threshold.max))
   print(c("Number of genes:", N))
   print(c("Number of Gene Sets:", Ng))
   print(c("Number of samples:", Ns))
@@ -1255,8 +1255,7 @@ GSEA <- function(
   }
 
   gene.list2 <- obs.index
-  for (i in 1:Ng) {#kelsie #199
-    #i= 198
+  for (i in 1:Ng) {
     print(paste("Computing observed enrichment for gene set:", i, gs.names[i], sep=" "))
     gene.set <- gs[i,gs[i,] != "null"]
     gene.set2 <- vector(length=length(gene.set), mode = "numeric")
@@ -1314,7 +1313,7 @@ GSEA <- function(
         }
       } else { # if no resampling then compute only one column (and fill the others with the same value)
         obs.gene.list2 <- obs.order.matrix[,1]
-        if (use.fast.enrichment.routine == F) {#Kelsie
+        if (use.fast.enrichment.routine == F) {
           GSEA.results <- GSEA.EnrichmentScore(gene.list=obs.gene.list2, gene.set=gene.set2, weighted.score.type=weighted.score.type, correl.vector=obs.correl.matrix[, r])
         } else {
           GSEA.results <- GSEA.EnrichmentScore2(gene.list=obs.gene.list2, gene.set=gene.set2, weighted.score.type=weighted.score.type, correl.vector=obs.correl.matrix[, r])
@@ -1390,7 +1389,7 @@ GSEA <- function(
           neg.phi <- c(neg.phi, phi[i, j])
         }
       }
-      ES.value <- Obs.ES[i] #kelsie here
+      ES.value <- Obs.ES[i]
       if (ES.value >= 0) {
         p.vals[i, 1] <- signif(sum(pos.phi >= ES.value)/length(pos.phi), digits=5)
       } else {
