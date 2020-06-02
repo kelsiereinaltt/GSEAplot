@@ -1076,7 +1076,7 @@ GSEA <- function(
   for (i in 1:max.Ng) {
     temp.size.G[i] <- length(unlist(strsplit(temp[[i]], "\t"))) - 2
   }
-  longsest.gs <- max(temp.size.G)
+  longest.gs <- max(temp.size.G)
   gs.size.threshold.max <- longest.gs + 9999999999
 
   max.size.G <- max(temp.size.G)

@@ -1,4 +1,4 @@
-Run of GSEA on  2020-06-02 21:26:17
+Run of GSEA on  2020-06-02 21:30:18
 gene.ann = 
 gs.ann = 
 output.directory = /Users/kelsiereinaltt/Documents/GSEAplot/results/
@@ -13,7 +13,7 @@ fdr.q.val.threshold = 0.25
 topgs = 20
 adjust.FDR.q.val = FALSE
 gs.size.threshold.min = 2
-gs.size.threshold.max = 1000
+gs.size.threshold.max = 9999999999
 reverse.sign = FALSE
 preproc.type = 0
 random.seed = 3338
