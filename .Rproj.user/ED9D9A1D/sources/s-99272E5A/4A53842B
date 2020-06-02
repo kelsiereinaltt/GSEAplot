@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1552087405963.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "4A53842B",
+    "lastKnownWriteTime" : 1571279850,
+    "last_content_update" : 1571279850213,
+    "path" : "C:/Users/Student/GSEA.plot/vignettes/GSEA.plot.vignette.RMd",
+    "project_path" : "vignettes/GSEA.plot.vignette.RMd",
+    "properties" : {
+        "cursorPosition" : "16,18",
+        "scrollLine" : "8"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

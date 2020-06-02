@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1566407814712.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "7AFC5279",
+    "lastKnownWriteTime" : 1571275346,
+    "last_content_update" : 1571275346,
+    "path" : "C:/Users/Student/GSEA.plot/R/Run.GSEA.022319.R",
+    "project_path" : "R/Run.GSEA.022319.R",
+    "properties" : {
+        "cursorPosition" : "150,21",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 7,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

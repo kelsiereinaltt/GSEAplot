@@ -1,0 +1,66 @@
+
+##############################################################################
+# gtex gsea
+##############################################################################
+
+
+# R
+library(devtools)
+devtools::install_github("sarah-innis/GSEA.plot")
+library(GSEA.plot)
+setwd("C:/Users/Student/Documents/CivelekLab/August_Edits")
+
+# data
+fname = "expr_gtexSubq_gsea.txt"
+expr = read.table(fname,header=T,stringsAsFactors=F)
+fname = "lab_gtexSubq_gsea.txt"
+ann = read.table(fname,header=F,stringsAsFactors=F)[1,] %>% t
+ann = as.character(ann)
+
+# format expr
+expr2 = expr[!(duplicated(expr[,1])==T),]
+expr.input = expr2[,3:ncol(expr2)]
+rownames(expr.input) = expr2[,1]
+
+# format ann
+class.v = rep(0,length(ann))
+class.v[ann == "Male"] = 1
+phen = c("Female", "Male")
+pheno.input = list(class.v=class.v, phen=phen)
+
+
+
+##############################################################################
+# add klf14 to hallmark
+##############################################################################
+# hallmark gene sets
+data(hallmark.gs)
+
+# get klf14 targets
+fname = "f_KLF14trans.txt"
+transf = read.table(fname,header=F,stringsAsFactors=F)
+fname = "m_KLF14trans.txt"
+transm = read.table(fname,header=F,stringsAsFactors=F)
+tx = c("HALLMARK_KLF14","http://www.broadinstitute.org/gsea/msigdb/cards/HALLMARK_KLF14",transf[,1], transm[,1])
+
+# get format for klf14 targets
+# TF_db = list(HALLMARK_KLF14_TARGETS = tx)
+# new_geneset = create_geneset_db(TF_db)
+new_geneset = paste(tx, collapse = "\t")
+gene.set.input = hallmark.gs
+gene.set.input[[length(hallmark.gs)+1]] = new_geneset
+
+
+# run GSEA
+pp = GSEAplots(input.ds.name = expr.input, input.cls.name = pheno.input,
+               gene.set.input = gene.set.input, doc.string = "gtex6p",
+               nperm = 1000, gs.size.threshold.max=1000, fdr.q.val.threshold = 0.25,
+               bar_percent = 0.1, gap_percent = 0.1, under_percent = 0.1,
+               upper_percent = 0.1, color_line = "black", color_tick = "black",
+               abs.val = F, gs.size.threshold.max =1000)
+
+# generate plots
+plot.ES(list.of.plots=pp$plots,plotname="GSEA_plots")
+
+
+
