@@ -22,20 +22,22 @@ May 23, 2020
 
 This vignette gives an introduction to the GSEAplot package. This package builds on the Gene Set Enrichment Analysis (GSEA), a computational method published by the Broad Institute. This package uses the enrichment data from the Broad Institute's analysis to create plots that are easier to understand and modify, and expands the amount of gene sets analyzed, thus increasing the amount of plots output by the analysis. In addition to improved plotting functionality, this package also introduces the capability to create or customize geneset databases. The package includes all geneset databases published by the Broad Institute as well as 6 different transcription factor databases and two databases containing ligands and receptor pairs.
 
-Three data files are needed in order to perform the gene set enrichment analysis. The **GSEAplots** function executes the analysis producing a summary results file for each phenotype in the working directory. Within the current working directory a folder will be created with the name assigned to doc.string in the **GSEAplots** function call. The results for each gene set within the database will be saved into this folder. **plot.ES** saves a pdf of all generated enrichment graphs into the working directory.
+Three data files are needed in order to perform the gene set enrichment analysis. The **GSEAplots** function executes the analysis producing a summary results file for each phenotype in the working directory. Within the current working directory a folder will be created with the name assigned to doc.string in the **GSEAplots** function call. The results for each gene set within the database will be saved into this folder. The **plot.ES** function saves a pdf of all generated enrichment graphs into the working directory.
 
 #Load the Package
 
 The following script will load the package intot the user's library:
 
-```{r echo=TRUE, message=FALSE,warning=FALSE, error=FALSE}
+```{r echo=TRUE,results='hide',message=FALSE,warning=FALSE, error=FALSE}
 remotes::install_github("kelsiereinaltt/GSEAplot")
 library(devtools)
 library(GSEAplot)
 ```
 
 #Geneset Database Options
-To improve on the GSEA code published by the Broad Institute, additional geneset database options were included within this package.
+To improve on the GSEA code published by the Broad Institute, additional geneset database options were included within this package. The GSEAplot function was made to be compatible with other data sets, whether the data comes from another source or is modified by the user. *Instructions for how to loading, running, and modifying a gene set database are detailed in sections of the manuscript.*
+
+Detailed below.
 
 ## Identifying and Loading Existing Databases
 Calling the key included within the package shows which databases are currently saved in the package.
@@ -47,12 +49,6 @@ head(key)
 
 The key has three columns: file, description, and source. The descripton correspoinding to a file makes the databases more accessible by detailing what a database contains. Users can identify a dataset of interest by reading its description then loading the databae usuing its file name.  
 
-The function **database_key** returns the file name of a database given the description of a database.
-
-```{r}
-GO_mf_filename=database_key("GO molecular function")
-GO_mf_filename
-```
 
 **database_key** may also return the descriptons for all databases when the function input is "all". Given the descriptions of all databases, the user may re-use the function with the decription of interest to find the file of interest. 
 
@@ -61,11 +57,19 @@ descriptive_names=database_key("all")
 head(descriptive_names)
 ```
 
+The function **database_key** returns the file name of a database given the description of a database.
+
+```{r}
+GO_mf_filename=database_key("GO molecular function")
+GO_mf_filename
+```
+
+
 Once the file name is identified, the database of interest may be loaded intoo the workspace.
 
 ```{r}
 data(hallmark.gs)
-data(C1.gs)
+data(C1.gs) #make this c5
 ```
 
 
@@ -76,8 +80,6 @@ sets=get_genesets(hallmark.gs)
 head(sets) 
 ```
 
-## Modifying or Creating Databases
-The GSESplot function was make to be compatible with other data sets, whether the data comes from another source or is modified by the user. Instructions for how to loading, running, and modifying a gene set database are detailed in the sections of the manuscript. 
 
 # Setting up Data for Gene Set Enrichment Analysis using GSEAplot
 Gene Set Enrichment Analysis requires the user to provide three dataframes: an expression file, a phenotype file, and a geneset database. The user may use dataframes provided in this package, or create his/her own dataframes. To load data included in the package, call the desired R dataset within the **data()** function. If you have not saved data to the package, simply assign your data to the corresponding function parameter making sure that it follows the correct data formatting. Instructions for how to prepare each file are included on the Broad Institute page for their GSEA analysis function.
@@ -113,21 +115,19 @@ gene.set.input=hallmark.gs
 
 In addition to the three data frames, the GSEA analysis requires a number of other parameters.
 
-$\underline{Analysis Paramaters:}$
+$\underline{Analysis and Input Paramaters:}$
 
-• **input.ds.name** - references differential expression data.
+• *input.ds.name* - references differential expression data.
 
-• **input.cls.name** - references phenotype input.
+• *input.cls.name* - references phenotype input.
 
-• **gene.set.input** - references geneset database.
+• *gene.set.input* - references geneset database.
 
-• **doc.string** - name of the folder where individual geneset results are saved to. The folder is created if it does not exist.
+• *doc.string* - name of the folder where individual geneset results are saved to. The folder is created if it does not exist.
 
-• **nperm** - determines the number of permutations. Permutations are used to analyze the significance of the association between gene expression and phenotype, and determine whether the associations are more significant than random ones.
+• *nperm* - determines the number of permutations. Permutations are used to analyze the significance of the association between gene expression and phenotype, and determine whether the associations are more significant than random ones.
 
-• **fdr.q.val.threshold** - sets a limit on false discovery rate. Set at a default of 0.25, we would expect that 3 out of 4 times the result is valid. The fdr value is computed as a ratio of the enrichment score to the enrichment scores for all permutations of the gene set over the ratio of the enrichment score to the enrichment scores of the actual gene set.
-
-• **abs.val** - When set to true (T), genes are ranked according to the absolute value of their signal to noise ratio. This vaulue is set to false (F) by default.
+• *abs.val* - When set to true (T), genes are ranked according to the absolute value of their signal to noise ratio. This vaulue is set to false (F) by default.
 
 
 
@@ -152,7 +152,6 @@ The following script is an example of how to properly use the **GSEAplots** func
                gene.set.input=gene.set.input,
                doc.string="GSEA_plots",
                nperm=1000,
-               fdr.q.val.threshold = 0.25,
                abs.val=F,
                bar_percent=0.1,
                gap_percent=0.1,
@@ -174,7 +173,7 @@ The following is an example of an erichment plot from the first geneset:
 pp$plots[[1]]
 ``` 
 
-Use the function **plot.ES** to save a pdf of enrichment plots for all significant sets in the gene set database. The pdf will save to the working directory.
+Use the function **plot.ES** to save a pdf of enrichment plots for all sets in the gene set database. The pdf will save to the working directory.
 
 ```{r results='hide'}
 plot.ES(list.of.plots=pp$plots,plotname="GSEA_plots")
@@ -232,8 +231,8 @@ p <- p+ggtitle(names(pp$gene.set.reference.matrix)[[2]])
 print(p)
 ```
 
-## Running GSEA on a New Database
-This package introduces the ability to create your own database. This  requires the name of the list to be the names of the gene sets. The items in each element of the list need to include the description/source and gene symbols. For example, the names of a potential list would be the transcription factors and the elements would be the genes affected by that specific transcription factor. The **create_geneset_db()** function then converts this list into a format compatible with the **GSEAplots** function.  
+## Running GSEA on a Novel Geneset
+This package introduces the ability to create your own database. This requires the name of the list to be the names of the gene sets. The items in each element of the list need to include the description/source and gene symbols. For example, the names of a potential list would be the transcription factors and the elements would be the genes affected by that specific transcription factor. The **create_geneset_db()** function then converts this list into a format compatible with the **GSEAplots** function.  
 
 The following script creates a custom geneset database (containing the first three genesets in the Hallmark database) that is compatible with the **GSEAplots** function:
 ```{r}
@@ -250,11 +249,17 @@ gene.set.input=create_geneset_db(hall_13.db)
 
 ```{r results="hide"}
 hall_13_results= GSEAplots(input.ds.name=expr.input,
-               input.cls.name=pheno.input, gene.set.input=gene.set.input,
-               doc.string="Aagmex_hall13", nperm=1000,
-               fdr.q.val.threshold = 0.25, bar_percent=0.1, gap_percent=0.1,
-               under_percent=0.1,upper_percent=0.1,color_line="black",
-               color_tick="black",abs.val=F)
+                           input.cls.name=pheno.input,
+                           gene.set.input=gene.set.input,
+                           doc.string="Aagmex_hall13",
+                           nperm=1000,
+                           bar_percent=0.1,
+                           gap_percent=0.1,
+                           under_percent=0.1,
+                           upper_percent=0.1,
+                           color_line="black",
+                           color_tick="black",
+                           abs.val=F)
 ```
 
 ```{r fig.width=4,fig.height=4}
@@ -269,13 +274,13 @@ To add the geneset HALLMARK_KLF14 create a row vector with the name of the set t
 ```{r}
 data(transf)
 data(transm)
-tx = t(c("HALLMARK_KLF14","http://www.broadinstitute.org/gsea/msigdb/cards/HALLMARK_KLF14",transf[,1], transm[,1]))
+tx = t(c("HALLMARK_KLF14","custom",transf[,1], transm[,1]))
 ```
 
 The add_to_database function adds this set to the hallmark sets and formats it for use in the function. An example of it being used is in the section below. 
 ```{r}
 gene.set.input=add_to_database(database=hallmark.gs,addition=tx)
-head(gene.set.input)
+head(gene.set.input) #KELSIE - truncate results - it runs off page. if its too hard, just remove this like
 ```
 
 
@@ -287,7 +292,7 @@ aagmex_pheno$phen
 head(aagmex_pheno$class.v)
 ```
 
-The create_phenoinput file takes a character column with labels for the phenotype of each sample and makes it into a working pheno.input for the GSEA.plot function. 
+The create_phenoinput function takes a character column with labels for the phenotype of each sample and makes it into a working pheno.input for the GSEA.plot function. 
 
 ```{r}
 data(gtex_ann)
@@ -303,11 +308,17 @@ expr.input=gtex_expr
 ```{r results="hide",warning=FALSE}
 
 gtex_example= GSEAplots(input.ds.name=expr.input,
-               input.cls.name=pheno.input, gene.set.input=gene.set.input,
-               doc.string="Gtex_hall", nperm=1000,
-               fdr.q.val.threshold = 0.25,abs.val=F,bar_percent=0.1,
-               gap_percent=0.1, under_percent=0.1, upper_percent=0.1,
-               color_line="black", color_tick="black")
+                        input.cls.name=pheno.input,
+                        gene.set.input=gene.set.input,
+                        doc.string="Gtex_hall",
+                        nperm=1000,
+                        abs.val=F,
+                        bar_percent=0.1,
+                        gap_percent=0.1,
+                        under_percent=0.1,
+                        upper_percent=0.1,
+                        color_line="black",
+                        color_tick="black")
 ```
 
 
@@ -315,22 +326,29 @@ gtex_example= GSEAplots(input.ds.name=expr.input,
 gtex_example$plots[[2]]
 ```
 
-#Introduction of New Databases into GSEAplot Package
+# Other Databases Included in GSEAplot Package
 This package offers new databases: transcription factor databases, and Kadoki Ligand and Receptor Databases.
 
 ## Introduction of Transcription Factor Databases
 The following transcription factor databases were introduced: Neph2012, ENCODE, ITFP, Marbach2016, TRRUST, and TRED (https://github.com/slowkow/tftargets).
+Kelsie - reference the papers in the github
 
 ```{r results="hide"}
 data(ENCODE.db)
 gene.set.input=ENCODE.db
 
 enrichment_TF= GSEAplots(input.ds.name=expr.input,
-               input.cls.name=pheno.input, gene.set.input=gene.set.input,
-               doc.string="Aagmex_TF", nperm=1000, fdr.q.val.threshold = 0.25,
-               bar_percent=0.1, gap_percent=0.1, under_percent=0.1,
-               upper_percent=0.1, color_line="black",
-               color_tick="black",abs.val=F)
+                         input.cls.name=pheno.input,
+                         gene.set.input=gene.set.input,
+                         doc.string="Aagmex_TF",
+                         nperm=1000, 
+                         bar_percent=0.1,
+                         gap_percent=0.1,
+                         under_percent=0.1,
+                         upper_percent=0.1,
+                         color_line="black",
+                         color_tick="black",
+                         abs.val=F)
 ```
 
 ```{r fig.width=4,fig.height=4}
@@ -340,15 +358,23 @@ enrichment_TF= GSEAplots(input.ds.name=expr.input,
 
 ## Introduction of Kadoki Ligand and Receptor Database
 NOTE: Sarah does not specify where she got this data from - is it possible to find out??
+https://www.cell.com/cell/pdf/S0092-8674(17)30949-2.pdf
 ```{r results="hide"}
 data(Kadoki_ligands.db)
 gene.set.input=Kadoki_ligands.db
 
 ligand_results=GSEAplots(input.ds.name=expr.input,
-               input.cls.name=pheno.input, gene.set.input=gene.set.input,
-               doc.string="Aagmex_ligands", nperm=1000,fdr.q.val.threshold = 0.25,
-               bar_percent=0.1, gap_percent=0.1, under_percent=0.1,upper_percent=0.1,color_line="black",
-               color_tick="black",abs.val=F)
+                         input.cls.name=pheno.input, 
+                         gene.set.input=gene.set.input,
+                         doc.string="Aagmex_ligands", 
+                         nperm=1000,
+                         bar_percent=0.1,
+                         gap_percent=0.1,
+                         under_percent=0.1,
+                         upper_percent=0.1,
+                         color_line="black",
+                         color_tick="black",
+                         abs.val=F)
 ```
 
 ```{r fig.width=4,fig.height=4}
@@ -361,10 +387,17 @@ data(Kadoki_receptors.db)
 gene.set.input=Kadoki_receptors.db
 
 receptor_results=GSEAplots(input.ds.name=expr.input,
-               input.cls.name=pheno.input, gene.set.input=gene.set.input,
-               doc.string="Aagmex_receptors", nperm=1000,fdr.q.val.threshold = 0.25,
-               bar_percent=0.1, gap_percent=0.1, under_percent=0.1,upper_percent=0.1,color_line="black",
-               color_tick="black",abs.val=F)
+                           input.cls.name=pheno.input, 
+                           gene.set.input=gene.set.input,
+                           doc.string="Aagmex_receptors", 
+                           nperm=1000,
+                           bar_percent=0.1,
+                           gap_percent=0.1,
+                           under_percent=0.1,
+                           upper_percent=0.1,
+                           color_line="black",
+                           color_tick="black",
+                           abs.val=F)
 ```
 
 ```{r fig.width=4,fig.height=4}
@@ -376,4 +409,6 @@ receptor_results=GSEAplots(input.ds.name=expr.input,
 * Subramanian, Tamayo, et al. (2005), PNAS 102, 15545-15550, http://www.broad.mit.edu/gsea/
 * https://github.com/slowkow/tftargets
 * https://www.ncbi.nlm.nih.gov/pubmed/28942919
+* https://www.cell.com/cell/pdf/S0092-8674(17)30949-2.pdf
+
 

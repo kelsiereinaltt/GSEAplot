@@ -6,7 +6,6 @@
 #' @param gene.set.input Name of the geneset file
 #' @param doc.string Name of the output folder for analysis and for naming output files
 #' @param nperm number of permutations
-#' @param fdr.q.val.threshold significance threshold for fdr q-values
 #' @param bar_percent proportional height of tick mark to window
 #' @param gap_percent proportional height between minimum enrichment score and top of tick mark to the window
 #' @param under_percent proportional height of white space under tick marks to the window size
@@ -14,7 +13,6 @@
 #' @param color_line color of enrichment score line in plot pdf
 #' @param color_tick color to tick marks on plot
 #' @param abs.val Default is false. Determines whether genes are ranked according to signal to noise or absolute value of signal to noise (when abs.val=T)
-#' @param gs.size.threshold.max Default is 1000. Maximum matches between geneset and gene labels
 #'
 #' @details GSEA analysis is computed using the Broad Institute's R source code. Genes are ranked according to signal to noise ratio (difference in means/sum of standard deviations for the two phenotypes)
 #' @return pp a list pp which includes : plots, gene.set.reference.matrix, gene.set.leading, report1, report2, ES
@@ -32,16 +30,14 @@ GSEAplots= function(input.ds.name="",
                     gene.set.input="",
                     doc.string="",
                     nperm=1000,
-                    fdr.q.val.threshold = 0.25,
                     bar_percent=0.1,
                     gap_percent=0.1,
                     under_percent=0.1,
                     upper_percent=0.1,
                     color_line="black",
                     color_tick="black",
-                    abs.val=F,
-                    gs.size.threshold.max=9999999999,
-                    gs.size.threshold.min=2)
+                    abs.val=F#,
+                    )
 {
   # GSEA 1.0 -- Gene Set Enrichment Analysis / Broad Institute
 
@@ -53,7 +49,6 @@ GSEAplots= function(input.ds.name="",
     #   doc.string: Dataset_geneset
     #   nperm: number of permutations, default is 1000
     #   nom.p.val.threshold Significance threshold for nominal p-vals for gene sets (default: -1, no thres)
-    #   fdr.q.val.threshold   = 0.25,   Significance threshold for FDR q-vals for gene sets (default: 0.25)
 
   wd_new=getwd()
   if (file.exists(paste0(wd_new,"/", doc.string))==FALSE){
@@ -77,11 +72,8 @@ GSEAplots= function(input.ds.name="",
                    weighted.score.type   =  1,                         # Enrichment correlation-based weighting: 0=no weight (KS), 1= weigthed, 2 = over-weigthed (default: 1)
                    nom.p.val.threshold   = -1,                         # Significance threshold for nominal p-vals for gene sets (default: -1, no thres)
                    fwer.p.val.threshold  = -1,                         # Significance threshold for FWER p-vals for gene sets (default: -1, no thres)
-                   fdr.q.val.threshold   = 0.25,                       # Significance threshold for FDR q-vals for gene sets (default: 0.25)
                    topgs                 = 20,                         # Besides those passing test, number of top scoring gene sets used for detailed reports (default: 10)
                    adjust.FDR.q.val      = F,                          # Adjust the FDR q-vals (default: F)
-                   gs.size.threshold.min = gs.size.threshold.min,      # Minimum size (in genes) for database gene sets to be considered (default: 25)
-                   gs.size.threshold.max = gs.size.threshold.max,      # Maximum size (in genes) for database gene sets to be considered (default: 500)
                    reverse.sign          = F,                          # Reverse direction of gene list (pos. enrichment becomes negative, etc.) (default: F)
                    preproc.type          = 0,                          # Preproc.normalization: 0=none, 1=col(z-score)., 2=col(rank) and row(z-score)., 3=col(rank). (def: 0)
                    random.seed           = 3338,                       # Random number generator seed. (default: 123456)

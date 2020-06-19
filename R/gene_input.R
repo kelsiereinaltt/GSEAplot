@@ -1,10 +1,12 @@
 #' View Available Geneset Databases
 #'
-#' This function takes one input, the common name of the geneset database you are interested in and returns the name of the rda file that can be used in the GSEA analysis function.
-#' If the input is "all" then all database common names are returned.
+#' The function database_key returns the name of the rda file the user may be interested in given the common name of the geneset database.
+#' The function may also return the name of all databases if the input is "all".
 #'
-#' @param database_name Either enter "all" or a string containing the name of one of the existing geneset databases
-#' @return Either the names of all existing gene set databases or the file name for the specified database
+#' @param database_name The input for this paramter needs to be "all", or the description of the database of interest.
+#' 
+#' 
+#' @return If the input for database_name is "all", the function will return the descriptons for all databases. If the user inputs the descripton of a database, the function will return the file name of the database of interest.
 #' @export
 
 
@@ -23,7 +25,7 @@ database_key=function(database_name=""){
 
 #' View Gene Sets within Database
 #'
-#' This function takes one input, the file name for the database, and returns the names of the sets within the database.
+#' This function returns the names of the sets within a database given the file name for the database.
 #'
 #' @param database_file Name of the rda file for the geneset database within the package
 #' @return The names of the genesets within the database
@@ -46,11 +48,12 @@ for (i in 1:max.Ng) {
 return(names)
 }
 
-#' Format New Geneset Daatbase
+
+#' Format New Geneset Database
 #'
-#' When given a list with keys as a set name and the data corresponding to a key, the gene symbols corresponding to that key. This function will reformat the data to be saved into the package and to be a working input to the GSEA.plots function.
-#' @param database a list names are the sets within the database and contained within those are genesymbols
-#' @return formatted_db a database ready to be saved to the package and used in later GSEA analyses
+#' The create_geneset_db function allows users to create a new database. Given a list wich meets certain specifications, this function will reformat the data in the list to be saved into a database form compatible with GSEAplot functions.
+#' @param database a list, with the name of the list being the names of the genesets and elements of the list as the description/source and gene symbols.
+#' @return database, saved as formatted_db, which may be saved to the work environment and an used in later GSEA analyses.
 #' @export
 create_geneset_db=function(database=""){
   formatted_db=list()
@@ -68,10 +71,10 @@ create_geneset_db=function(database=""){
 
 #' Get Gene Symbols
 #'
-#' This function takes one input, the file name for the database and and returns the gene symbols within that set.
+#' The get_genesymbols function returns the gene symbols within each gene set given the file name of the database of interest.
 #'
-#' @param database_file Name of the rda file for the geneset database within the package
-#' @return The gene symbols within that gene set
+#' @param database_file Name of the rda file for the geneset database within the package.
+#' @return The gene symbols within each gene set in a database.
 #' @export
 
 get_genesymbols=function(database_file=""){
@@ -95,13 +98,14 @@ get_genesymbols=function(database_file=""){
   return(db)
 }
 
-#' Add to Existing Gene set Database
+#' Add to Existing Gene Set Database
 #'
-#' This function takes two inputs: the formatted existing database and the gene sets to add.It will return the combined database ready to be used in the GSEA function.
+#' The function add_to_database returns a database comprised of an existing database and new data, which are paramters provded by the user. The dataset that results from this function will be formatted to be compatible with GSEA functions.
+#' 
 #'
-#' @param database the formatted existing database
-#' @param addition the gene sets to be added
-#' @return a formatted database with new sets included
+#' @param database formatted existing database.
+#' @param addition gene sets to be added to existing database.
+#' @return a formatted database with new sets included.
 #' @export
 
 add_to_database=function(database="",addition=""){

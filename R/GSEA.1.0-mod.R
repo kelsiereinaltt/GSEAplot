@@ -1,6 +1,6 @@
 #' GSEA Source Code Functions
 #'
-#' These functions were written by the Broad Institute and published as a part of their attempt to make their Gene Set Enrichment Analysis able to be run in R. These functions are used within the functions written in this package. They are not meant to be used by the user but are made available if they need to be used.
+#' The following functions were used and published by the Broad Institute as a part of an attempt to make Gene Set Enrichment Analysis available in R. These functions are used within the functions written in this package. They are not meant to be used by the user but are made available if they need to be used.
 #' @param x,y
 #' @name GSEA_Source
 #' @references Subramanian, Tamayo, et al. (2005), PNAS 102, 15545-15550, http://www.broad.mit.edu/gsea/
@@ -811,11 +811,10 @@ GSEA <- function(
   weighted.score.type = 1,
   nom.p.val.threshold = -1,
   fwer.p.val.threshold = -1,
-  fdr.q.val.threshold = 0.25,
   topgs = 10,
   adjust.FDR.q.val = F,
-  gs.size.threshold.min = 2,
-  gs.size.threshold.max = 9999999999,
+  #gs.size.threshold.min = 2,
+  #gs.size.threshold.max = 9999999999,
   reverse.sign = F,
   preproc.type = 0,
   random.seed = 123456,
@@ -849,7 +848,6 @@ GSEA <- function(
   #   weighted.score.type: Enrichment correlation-based weighting: 0=no weight (KS), 1=standard weigth, 2 = over-weigth (default: 1)
   #   nom.p.val.threshold: Significance threshold for nominal p-vals for gene sets (default: -1, no thres)
   #   fwer.p.val.threshold: Significance threshold for FWER p-vals for gene sets (default: -1, no thres)
-  #   fdr.q.val.threshold: Significance threshold for FDR q-vals for gene sets (default: 0.25)
   #   topgs: Besides those passing test, number of top scoring gene sets used for detailed reports (default: 10)
   #   adjust.FDR.q.val: Adjust the FDR q-vals (default: F)
   #   gs.size.threshold.min: Minimum size (in genes) for database gene sets to be considered (default: 25)
@@ -920,7 +918,9 @@ GSEA <- function(
   # This software is supplied without any warranty or guaranteed support
   # whatsoever. Neither the Broad Institute nor MIT can be responsible for
   # its use, misuse, or functionality.
-
+  fdr.q.val.threshold = 0.25 #sets a limit on false discovery rate.
+  gs.size.threshold.min = 2 #Minimum size (in genes) for database gene sets to be considered (default: 2)
+  gs.size.threshold.max = 9999999999 #Minimum size (in genes) for database gene sets to be considered (default: 9999999999)
   print(" *** Running GSEA Analysis...")
 
 
@@ -970,11 +970,10 @@ GSEA <- function(
     write(paste("weighted.score.type =", weighted.score.type, sep=" "), file=filename, append=T)
     write(paste("nom.p.val.threshold =", nom.p.val.threshold, sep=" "), file=filename, append=T)
     write(paste("fwer.p.val.threshold =", fwer.p.val.threshold, sep=" "), file=filename, append=T)
-    write(paste("fdr.q.val.threshold =", fdr.q.val.threshold, sep=" "), file=filename, append=T)
     write(paste("topgs =", topgs, sep=" "), file=filename, append=T)
     write(paste("adjust.FDR.q.val =", adjust.FDR.q.val, sep=" "), file=filename, append=T)
-    write(paste("gs.size.threshold.min =", gs.size.threshold.min, sep=" "), file=filename, append=T)
-    write(paste("gs.size.threshold.max =", gs.size.threshold.max, sep=" "), file=filename, append=T)
+    #write(paste("gs.size.threshold.min =", gs.size.threshold.min, sep=" "), file=filename, append=T)
+    #write(paste("gs.size.threshold.max =", gs.size.threshold.max, sep=" "), file=filename, append=T)
     write(paste("reverse.sign =", reverse.sign, sep=" "), file=filename, append=T)
     write(paste("preproc.type =", preproc.type, sep=" "), file=filename, append=T)
     write(paste("random.seed =", random.seed, sep=" "), file=filename, append=T)
@@ -1125,7 +1124,7 @@ GSEA <- function(
 
   N <- length(A[,1])
   Ns <- length(A[1,])
-  print(c("gs.size.threshold.max: ", gs.size.threshold.max))
+  #print(c("gs.size.threshold.max: ", gs.size.threshold.max))
   print(c("Number of genes:", N))
   print(c("Number of Gene Sets:", Ng))
   print(c("Number of samples:", Ns))
