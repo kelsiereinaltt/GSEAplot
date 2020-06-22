@@ -170,7 +170,7 @@ Outputs of **GSEAplots** include plots, variables gene.set.reference.matrix and 
 The following is an example of an erichment plot from the first geneset:
 
 ```{r fig.width=4,fig.height=4}
-pp$plots[[1]]
+pp$plots[[50]]
 ``` 
 
 Use the function **plot.ES** to save a pdf of enrichment plots for all sets in the gene set database. The pdf will save to the working directory.
@@ -183,17 +183,17 @@ plot.ES(list.of.plots=pp$plots,plotname="GSEA_plots")
 
 *gene.set.reference.matrix* is a table of the gene sets being studied. 
 ```{r}
-names(pp$gene.set.reference.matrix)[[1]]
-head(pp$gene.set.reference.matrix[[1]])
+names(pp$gene.set.reference.matrix)[[50]]
+head(pp$gene.set.reference.matrix[[50]])
 ```
 
 
 *gene.set.leading* is a list containing the leading edge set (set of genes whose differential expression is most related to a change in phenotype) for each gene set. If differential expression is more strongly related to a change in the first phenotype, then the maximum absolute value of the runnning enrichment score (RES) will be positive. In this case the leading edge set is all of the enriched genes (have a tick mark) that are to the left of and including the max if it is enriched. If different expression is more related to the second phenotype then the largest running enrichment score is negative. In this case the leading edge set is all of the enriched genes that are to the right of and including the max if it is enriched.
 
-The following example displays the leading gene symbols for the first gene set:
+The following example displays the leading gene symbols for one of gene sets:
 ```{r}
-names(pp$gene.set.reference.matrix)[[1]]
-head(pp$gene.set.leading[[1]])
+names(pp$gene.set.reference.matrix)[[50]]
+head(pp$gene.set.leading[[50]])
 
 ```
 
@@ -209,14 +209,14 @@ pp$report1[1,-3]
 
 The list *ES* provides access to the enrichment score data used to generate the enrichment plots along with its corresponding gene symbol.
 ```{r }
-data1=pp$ES[[2]]
+data1=pp$ES[[1]]
 head(data1)
 ```
 
 Access to enrichment score data allows for deeper analysis of the gene set enrichment. Users of the package may create their own plotting functions using the data.
 
 The following describes the procedure for producing plots in the package as well as an example:
-#Kelsie -Left off Here
+
 Enrichment scores are plotted for each position within the gene set. A positive enrichment score indicates correlation with the first phenotype which in the case of the aagmex pheno data is Female and a negative enrichment score indicates correlation with the second phenotype, Male. The gene symbols within your gene set that are differentially expressed are indicated with a tick mark under this plot.In the enrichment score data these symbols are indicated with an EStag of 1. To specify the dimensions and positions of the tick marks a data frame is created to create line segments that have a regular height and are positioned at each position with an EStag of 1. The segments should be vertical so the vx or change in x over the segment should be 0. The y position in the data frame dictates the starting y position of the mark. It is currently set to 0.12 below the minimum of of the enrichment plot. vy dictates the end of each mark to be 0.04 higher than that starting position. In the plotting function, 0.12 and 0.04 are variables that can be modified by the bar_percent and under_percent parameters. Using ggplot, the enrichment score plot and tick marks are combined into one plot called p. 
 
 
@@ -227,7 +227,7 @@ d=data.frame(x=enrich_ind, y=matrix(min(data1$RES)-0.12,length(enrich_ind),1),
 p <- ggplot(data1, aes(index,RES))+geom_line(col="black")
 p <- p+geom_segment(data=d, mapping=aes(x=x, y=y, xend=x+vx, yend=y+vy),col="black")
 p <- p+theme_classic()
-p <- p+ggtitle(names(pp$gene.set.reference.matrix)[[2]])
+p <- p+ggtitle(names(pp$gene.set.reference.matrix)[[50]])
 print(p)
 ```
 
@@ -278,9 +278,9 @@ tx = t(c("HALLMARK_KLF14","custom",transf[,1], transm[,1]))
 ```
 
 The add_to_database function adds this set to the hallmark sets and formats it for use in the function. An example of it being used is in the section below. 
-```{r}
+```{r results="hide"}
 gene.set.input=add_to_database(database=hallmark.gs,addition=tx)
-head(gene.set.input) #KELSIE - truncate results - it runs off page. if its too hard, just remove this like
+head(gene.set.input)
 ```
 
 
@@ -323,7 +323,7 @@ gtex_example= GSEAplots(input.ds.name=expr.input,
 
 
 ```{r fig.width=4,fig.height=4}
-gtex_example$plots[[2]]
+gtex_example$plots[[50]]
 ```
 
 # Other Databases Included in GSEAplot Package
