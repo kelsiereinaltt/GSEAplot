@@ -7,12 +7,12 @@
 database_key(database_name = "")
 }
 \arguments{
-\item{database_name}{Either enter "all" or a string containing the name of one of the existing geneset databases}
+\item{database_name}{The input for this paramter needs to be "all", or the description of the database of interest.}
 }
 \value{
-Either the names of all existing gene set databases or the file name for the specified database
+If the input for database_name is "all", the function will return the descriptons for all databases. If the user inputs the descripton of a database, the function will return the file name of the database of interest.
 }
 \description{
-This function takes one input, the common name of the geneset database you are interested in and returns the name of the rda file that can be used in the GSEA analysis function.
-If the input is "all" then all database common names are returned.
+The function database_key returns the name of the rda file the user may be interested in given the common name of the geneset database.
+The function may also return the name of all databases if the input is "all".
 }

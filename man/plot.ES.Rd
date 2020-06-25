@@ -7,10 +7,13 @@
 \method{plot}{ES}(list.of.plots = "", plotname = "")
 }
 \arguments{
-\item{list.of.plots}{A list of ggplot items}
+\item{list.of.plots}{A list of ggplot objects containing the necessary information for an enrichment plot using ggplot2.}
 
-\item{plotname}{filename to save the plot as}
+\item{plotname}{A character by which to name and save the file with the ES plots.}
+}
+\value{
+A pdf containing the enrichment plots for all gene sets (with more than 2 genes in a gene set) in a database, saved as the value given plotname.
 }
 \description{
-Create a pdf of a list of ggplot objects that is obtained from the GSEA analysis. Outputs 4 graphs per page and saves to your working directory
+The plot.ES function creates a pdf of enrichment plots obtained from the GSEA analysis given a list of ggplot objects and a character by which to name the pdf. The pdf is formatted to contain 4 graphs per page and save to the working directory.
 }

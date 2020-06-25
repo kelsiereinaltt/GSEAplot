@@ -7,11 +7,11 @@
 get_genesymbols(database_file = "")
 }
 \arguments{
-\item{database_file}{Name of the rda file for the geneset database within the package}
+\item{database_file}{Name of the rda file for the geneset database within the package.}
 }
 \value{
-The gene symbols within that gene set
+The gene symbols within each gene set in a database.
 }
 \description{
-This function takes one input, the file name for the database and and returns the gene symbols within that set.
+The get_genesymbols function returns the gene symbols within each gene set given the file name of the database of interest.
 }

@@ -2,18 +2,18 @@
 % Please edit documentation in R/gene_input.R
 \name{add_to_database}
 \alias{add_to_database}
-\title{Add to Existing Gene set Database}
+\title{Add to Existing Gene Set Database}
 \usage{
 add_to_database(database = "", addition = "")
 }
 \arguments{
-\item{database}{the formatted existing database}
+\item{database}{formatted existing database.}
 
-\item{addition}{the gene sets to be added}
+\item{addition}{gene sets to be added to existing database.}
 }
 \value{
-a formatted database with new sets included
+a formatted database with new sets included.
 }
 \description{
-This function takes two inputs: the formatted existing database and the gene sets to add.It will return the combined database ready to be used in the GSEA function.
+The function add_to_database returns a database comprised of an existing database and new data, which are paramters provded by the user. The dataset that results from this function will be formatted to be compatible with GSEA functions.
 }

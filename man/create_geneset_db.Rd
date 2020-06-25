@@ -2,16 +2,16 @@
 % Please edit documentation in R/gene_input.R
 \name{create_geneset_db}
 \alias{create_geneset_db}
-\title{Format New Geneset Daatbase}
+\title{Format New Geneset Database}
 \usage{
 create_geneset_db(database = "")
 }
 \arguments{
-\item{database}{a list names are the sets within the database and contained within those are genesymbols}
+\item{database}{a list, with the name of the list being the names of the genesets and elements of the list as the description/source and gene symbols.}
 }
 \value{
-formatted_db a database ready to be saved to the package and used in later GSEA analyses
+database, saved as formatted_db, which may be saved to the work environment and an used in later GSEA analyses.
 }
 \description{
-When given a list with keys as a set name and the data corresponding to a key, the gene symbols corresponding to that key. This function will reformat the data to be saved into the package and to be a working input to the GSEA.plots function.
+The create_geneset_db function allows users to create a new database. Given a list wich meets certain specifications, this function will reformat the data in the list to be saved into a database form compatible with GSEAplot functions.
 }

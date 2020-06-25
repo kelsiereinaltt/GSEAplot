@@ -13,5 +13,5 @@ get_genesets(database_file = "")
 The names of the genesets within the database
 }
 \description{
-This function takes one input, the file name for the database, and returns the names of the sets within the database.
+This function returns the names of the sets within a database given the file name for the database.
 }

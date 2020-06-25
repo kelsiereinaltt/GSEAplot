@@ -7,11 +7,11 @@
 create_phenoinput(ann = "")
 }
 \arguments{
-\item{ann}{A list of the phenotypes for a sample. There should be two phenotypes.}
+\item{ann}{A list of the phenotypes for a sample. There should be two phenotypes (e.g., female and male).}
 }
 \value{
-A list that is ready to be used in the GSEA.plot function
+A list of the phenotypes converted into a GSEAplot computable format
 }
 \description{
-This function takes two inputs, the phenotype annotations and the order.
+The create_phenoinput function translates phenotypes into a format computable by the GSEA algorithm given a list of phenotypes.
 }

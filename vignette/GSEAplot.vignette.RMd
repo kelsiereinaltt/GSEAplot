@@ -115,7 +115,7 @@ gene.set.input=hallmark.gs
 
 In addition to the three data frames, the GSEA analysis requires a number of other parameters.
 
-$\underline{Analysis and Input Paramaters:}$
+$\underline{Analysis  and  Input  Paramaters:}$
 
 • *input.ds.name* - references differential expression data.
 
@@ -131,7 +131,7 @@ $\underline{Analysis and Input Paramaters:}$
 
 
 
-$\underline{Plotting Paramaters:}$
+$\underline{Plotting  Paramaters:}$
 
 • *bar_percent*: the size of the enrichment tick mark relative to the size of the enrichment score plot.
 
@@ -162,7 +162,7 @@ The following script is an example of how to properly use the **GSEAplots** func
 
 ```
 
-## Function outputs
+## Function Outputs
 Outputs of **GSEAplots** include plots, variables gene.set.reference.matrix and gene.set.leading, reports and enrichment scores. All outputs will be saved to the working directory.
 
 ###Plots
@@ -209,7 +209,7 @@ pp$report1[1,-3]
 
 The list *ES* provides access to the enrichment score data used to generate the enrichment plots along with its corresponding gene symbol.
 ```{r }
-data1=pp$ES[[1]]
+data1=pp$ES[[50]] #kelsie
 head(data1)
 ```
 
@@ -323,7 +323,8 @@ gtex_example= GSEAplots(input.ds.name=expr.input,
 
 
 ```{r fig.width=4,fig.height=4}
-gtex_example$plots[[50]]
+gtex_example$plots[[3]] #kelsie - pick most significant plot 
+#gtex_example$report1
 ```
 
 # Other Databases Included in GSEAplot Package
