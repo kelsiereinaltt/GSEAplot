@@ -13,7 +13,7 @@
 database_key=function(database_name=""){
   data(key)
   if (database_name=="all"){
-    return(key[,2])
+    return(as.character(key[,2]))
   }
   else {
     index=which(key[,2]==database_name)
