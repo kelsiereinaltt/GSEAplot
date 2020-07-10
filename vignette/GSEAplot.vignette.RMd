@@ -48,6 +48,7 @@ The key has three columns: file, description, and source. The descripton corresp
 **database_key** may also return the descriptons for all databases when the function input is "all". Given the descriptions of all databases, the user may re-use the function with the decription of interest to find the file of interest. 
 
 ```{r}
+
 descriptive_names=database_key("all")
 head(descriptive_names)
 ```
@@ -55,9 +56,8 @@ head(descriptive_names)
 The function **database_key** returns the file name of a database given the description of a database.
 
 ```{r}
-GO_mf_filename=database_key("GO molecular function")
+GO_mf_filename=database_key("hallmark all")
 GO_mf_filename
-GO_mf_filename = database_key(descriptive_names[20]) #kelsie -test this
 ```
 
 
@@ -65,7 +65,6 @@ Once the file name is identified, the database of interest may be loaded intoo t
 
 ```{r}
 data(hallmark.gs)
-data(C1.gs) #make this  hhallmark 
 ```
 
 
@@ -164,7 +163,7 @@ $\underline{Plotting Paramaters:}$
 
 • *color_tick*: color of the tick marks that indicate a gene symbol in the expression data that is within the given geneset.
 
-The following script is an example of how to properly use the **GSEAplots** function. Please note that on a computer with a MacOS 10.14 (Mojave) operating system, 2.2 GHz Intel Core i7 processor, and 16 GB of memory, the run time for this function with its current parameters is approximately 3.244399 minutes. kelsie NOTE.
+The following script is an example of how to properly use the **GSEAplots** function. Please note that on a computer with a MacOS 10.14 (Mojave) operating system, 2.2 GHz Intel Core i7 processor, and 16 GB of memory, the run time for this function with its current parameters is approximately 3.244399 minutes.
 ```{r results="hide",warning=FALSE}
 start_time <-Sys.time()
 
@@ -267,9 +266,9 @@ symbols=get_genesymbols(hallmark.gs)
 entry1=c("source_1",symbols$HALLMARK_PANCREAS_BETA_CELLS)
 entry2=c("source_2",symbols$HALLMARK_HYPOXIA)
 entry3=c("source_3",symbols$HALLMARK_CHOLESTEROL_HOMEOSTASIS)
-custom_db=list(entry1,entry2,entry3) #kelsie - if vignette doesn't run check here
-names(custom_db)=c(sets[1],sets[2],sets[3]) #and here
-gene.set.input=create_geneset_db(custom_db) #and here
+custom_db=list(entry1,entry2,entry3)
+names(custom_db)=c(sets[1],sets[2],sets[3])
+gene.set.input=create_geneset_db(custom_db)
 ```
 
 
@@ -334,7 +333,7 @@ enrichment_TF= GSEAplots(input.ds.name=expr.input,
 ```
 
 ```{r fig.width=4,fig.height=4}
- enrichment_TF$plots[1] #kelsie - plot the most significant one
+ enrichment_TF$plots[1] #kelsie - plot most significant 
 
 ```
 
@@ -383,7 +382,7 @@ receptor_results=GSEAplots(input.ds.name=expr.input,
 ```
 
 ```{r fig.width=4,fig.height=4}
- receptor_results$plots[1] #kelsie - plot the most significant one
+receptor_results$plots[1] #kelsie - plot the most significant one
 
 ```
 
