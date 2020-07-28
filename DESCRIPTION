@@ -6,7 +6,7 @@ Author: Sarah Innis, Kelsie Reinaltt
 Maintainer: <klr5fk@virginia.edu>
 Description: This function builds off of R code released by the Broad Institute for GSEA analysis.
     It ouputs the important results in a more user friendly manner and generates clearer plots.
-License: What license is it under?
+License: N/A
 Depends: ggplot2,
     ggthemes,
     dplyr,
