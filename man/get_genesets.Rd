@@ -7,11 +7,16 @@
 get_genesets(database_file = "")
 }
 \arguments{
-\item{database_file}{Name of the rda file for the geneset database within the package}
+\item{database_file}{Name of the rda file for the geneset database within the package.}
 }
 \value{
-The names of the genesets within the database
+The names of the genesets within the database.
 }
 \description{
 This function returns the names of the sets within a database given the file name for the database.
+}
+\examples{
+get_genesets(hallmark.gs)
+
+get_genesets(C3.tft.gs)
 }

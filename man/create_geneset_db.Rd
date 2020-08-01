@@ -15,3 +15,8 @@ database, saved as formatted_db, which may be saved to the work environment and 
 \description{
 The create_geneset_db function allows users to create a new database. Given a list wich meets certain specifications, this function will reformat the data in the list to be saved into a database form compatible with GSEAplot functions.
 }
+\examples{
+create_geneset_db(custom_db)
+
+create_geneset_db(modified_db)
+}

@@ -4,7 +4,12 @@
 #' @param list.of.plots A list of ggplot objects containing the necessary information for an enrichment plot using ggplot2.
 #' @param plotname A character by which to name and save the file with the ES plots.
 #' @return A pdf containing the enrichment plots for all gene sets (with more than 2 genes in a gene set) in a database, saved as the value given plotname.
+#' @examples  
+#' plot.ES(list.of.plots=pp$plots,plotname="GSEA_plots")
+#' plot.ES(list.of.plots=analaysis$plots,plotname="results_of_analysis")
+
 #' @export
+
 
 plot.ES=function(list.of.plots="",plotname=""){
   filename <- paste0(plotname,".pdf")

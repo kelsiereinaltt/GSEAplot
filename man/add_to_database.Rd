@@ -17,3 +17,8 @@ a formatted database with new sets included.
 \description{
 The function add_to_database returns a database comprised of an existing database and new data, which are paramters provded by the user. The dataset that results from this function will be formatted to be compatible with GSEA functions.
 }
+\examples{
+add_to_database(database=hallmark.gs,addition=new_geneset)
+
+add_to_database(database=custom_db,addition=new_geneset)
+}

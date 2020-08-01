@@ -16,3 +16,10 @@ If the input for database_name is "all", the function will return the descripton
 The function database_key returns the name of the rda file the user may be interested in given the common name of the geneset database.
 The function may also return the name of all databases if the input is "all".
 }
+\examples{
+database_key("all")
+
+database_key("hallmark all")
+
+database_key("motif transcription factor targets")
+}

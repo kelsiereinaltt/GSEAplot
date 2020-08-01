@@ -4,7 +4,11 @@
 #' 
 #'
 #' @param ann A list of the phenotypes for a sample. There should be two phenotypes (e.g., female and male).
-#' @return A list of the phenotypes converted into a GSEAplot computable format 
+#' @return A list of the phenotypes converted into a GSEAplot computable format.
+#' @examples 
+#' create_phenoinput(gtex_ann)
+#' 
+#' 
 #' @export
 
 create_phenoinput=function(ann=""){

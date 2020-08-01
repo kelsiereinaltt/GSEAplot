@@ -15,3 +15,10 @@ The gene symbols within each gene set in a database.
 \description{
 The get_genesymbols function returns the gene symbols within each gene set given the file name of the database of interest.
 }
+\examples{
+get_genesymbols(hallmark.gs)
+
+get_genesymbols(C3.tft.gs)
+
+get_genesymbols(custom_db)
+}

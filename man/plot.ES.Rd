@@ -17,3 +17,8 @@ A pdf containing the enrichment plots for all gene sets (with more than 2 genes 
 \description{
 The plot.ES function creates a pdf of enrichment plots obtained from the GSEA analysis given a list of ggplot objects and a character by which to name the pdf. The pdf is formatted to contain 4 graphs per page and save to the working directory.
 }
+\examples{
+ 
+plot.ES(list.of.plots=pp$plots,plotname="GSEA_plots")
+plot.ES(list.of.plots=analaysis$plots,plotname="results_of_analysis")
+}

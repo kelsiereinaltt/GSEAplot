@@ -5,8 +5,13 @@
 #'
 #' @param database_name The input for this paramter needs to be "all", or the description of the database of interest.
 #' 
-#' 
 #' @return If the input for database_name is "all", the function will return the descriptons for all databases. If the user inputs the descripton of a database, the function will return the file name of the database of interest.
+#' @examples
+#' database_key("all")
+#' 
+#' database_key("hallmark all")
+#' 
+#' database_key("motif transcription factor targets")
 #' @export
 
 
@@ -27,8 +32,12 @@ database_key=function(database_name=""){
 #'
 #' This function returns the names of the sets within a database given the file name for the database.
 #'
-#' @param database_file Name of the rda file for the geneset database within the package
-#' @return The names of the genesets within the database
+#' @param database_file Name of the rda file for the geneset database within the package.
+#' @return The names of the genesets within the database.
+#' @examples
+#' get_genesets(hallmark.gs)
+#' 
+#' get_genesets(C3.tft.gs)
 #' @export
 
 get_genesets=function(database_file=""){
@@ -52,8 +61,12 @@ return(names)
 #' Format New Geneset Database
 #'
 #' The create_geneset_db function allows users to create a new database. Given a list wich meets certain specifications, this function will reformat the data in the list to be saved into a database form compatible with GSEAplot functions.
-#' @param database a list, with the name of the list being the names of the genesets and elements of the list as the description/source and gene symbols.
-#' @return database, saved as formatted_db, which may be saved to the work environment and an used in later GSEA analyses.
+#' @param database A list, with the name of the list being the names of the genesets and elements of the list as the description/source and gene symbols.
+#' @return Database, saved as formatted_db, which may be saved to the work environment and an used in later GSEA analyses.
+#' @examples 
+#' create_geneset_db(custom_db)
+#' 
+#' create_geneset_db(modified_db)
 #' @export
 create_geneset_db=function(database=""){
   formatted_db=list()
@@ -75,6 +88,12 @@ create_geneset_db=function(database=""){
 #'
 #' @param database_file Name of the rda file for the geneset database within the package.
 #' @return The gene symbols within each gene set in a database.
+#' @examples 
+#' get_genesymbols(hallmark.gs)
+#' 
+#' get_genesymbols(C3.tft.gs)
+#' 
+#' get_genesymbols(custom_db)
 #' @export
 
 get_genesymbols=function(database_file=""){
@@ -106,6 +125,10 @@ get_genesymbols=function(database_file=""){
 #' @param database formatted existing database.
 #' @param addition gene sets to be added to existing database.
 #' @return a formatted database with new sets included.
+#' @examples 
+#' add_to_database(database=hallmark.gs,addition=new_geneset)
+#' 
+#' add_to_database(database=custom_db,addition=new_geneset)
 #' @export
 
 add_to_database=function(database="",addition=""){
