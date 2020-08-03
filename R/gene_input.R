@@ -122,9 +122,9 @@ get_genesymbols=function(database_file=""){
 #' The function add_to_database returns a database comprised of an existing database and new data, which are paramters provded by the user. The dataset that results from this function will be formatted to be compatible with GSEA functions.
 #' 
 #'
-#' @param database formatted existing database.
-#' @param addition gene sets to be added to existing database.
-#' @return a formatted database with new sets included.
+#' @param database Formatted existing database.
+#' @param addition Gene sets to be added to existing database.
+#' @return A formatted database with new sets included.
 #' @examples 
 #' add_to_database(database=hallmark.gs,addition=new_geneset)
 #' 

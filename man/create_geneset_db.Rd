@@ -7,10 +7,10 @@
 create_geneset_db(database = "")
 }
 \arguments{
-\item{database}{a list, with the name of the list being the names of the genesets and elements of the list as the description/source and gene symbols.}
+\item{database}{A list, with the name of the list being the names of the genesets and elements of the list as the description/source and gene symbols.}
 }
 \value{
-database, saved as formatted_db, which may be saved to the work environment and an used in later GSEA analyses.
+Database, saved as formatted_db, which may be saved to the work environment and an used in later GSEA analyses.
 }
 \description{
 The create_geneset_db function allows users to create a new database. Given a list wich meets certain specifications, this function will reformat the data in the list to be saved into a database form compatible with GSEAplot functions.

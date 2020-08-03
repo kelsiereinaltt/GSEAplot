@@ -7,12 +7,12 @@
 add_to_database(database = "", addition = "")
 }
 \arguments{
-\item{database}{formatted existing database.}
+\item{database}{Formatted existing database.}
 
-\item{addition}{gene sets to be added to existing database.}
+\item{addition}{Gene sets to be added to existing database.}
 }
 \value{
-a formatted database with new sets included.
+A formatted database with new sets included.
 }
 \description{
 The function add_to_database returns a database comprised of an existing database and new data, which are paramters provded by the user. The dataset that results from this function will be formatted to be compatible with GSEA functions.

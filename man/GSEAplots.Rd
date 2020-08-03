@@ -45,19 +45,19 @@ GSEAplots(
 \item{abs.val}{Default is false. Determines whether genes are ranked according to signal to noise or absolute value of signal to noise (when abs.val=T).}
 }
 \value{
-pp - a list pp which includes : plots, gene.set.reference.matrix, gene.set.leading, report1, report2, ES.
+pp - A list pp which includes : plots, gene.set.reference.matrix, gene.set.leading, report1, report2, ES.
 
-plots - a list of ggplot objects, this can act as an input to the function plot.ES() to output a pdf.
+plots - A list of ggplot objects, this can act as an input to the function plot.ES() to output a pdf.
 
-gene.set.reference.matrix - a list of each gene set within a gene set database and the gene symbols corresponding to each set.
+gene.set.reference.matrix - A list of each gene set within a gene set database and the gene symbols corresponding to each set.
 
 gene.set.leading - a similar structure to gene.set.reference.matrix but only contains the gene symbols within each gene set that are part of the leading edge set.
 
-report1 - summary of GSEA analysis data for the first phenotype.
+report1 - Summary of GSEA analysis data for the first phenotype.
 
-report2 - summary of GSEA analysis data for the second phenotype.
+report2 - Summary of GSEA analysis data for the second phenotype.
 
-ES - this object contains the enrichment scores and enrichment tags used to create the plots described earlier. The user can use this information to customize plots as they wish.
+ES - This object contains the enrichment scores and enrichment tags used to create the plots described earlier. The user can use this information to customize plots as they wish.
 }
 \description{
 Analyzes genetic expression data and determines whether defined gene sets show statistically significant differences with respect to two phenotypes.
