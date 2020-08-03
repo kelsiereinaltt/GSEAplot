@@ -1,4 +1,4 @@
-#' View Available Geneset Databases 
+#' View Available Geneset Databases
 #'
 #' The function database_key returns the name of the rda file the user may be interested in given the common name of the geneset database.
 #' The function may also return the name of all databases if the input is "all".
