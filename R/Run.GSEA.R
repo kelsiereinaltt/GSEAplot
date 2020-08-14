@@ -167,7 +167,7 @@ GSEAplots= function(input.ds.name="",
     p <- p+geom_segment(data=d, mapping=aes(x=x, y=y, xend=x+vx, yend=y+vy),col=color_tick)
     p <- p+theme_classic()
     p <- p+ylim(window_low,window_high)
-    p <- p+ggtitle(paste(strwrap(gene.set.numbers[[i]], width=0), collapse="")) #kelsie
+    p <- p+ggtitle(paste(strwrap(gene.set.numbers[[i]], width=0), collapse=""), width = 5) #kelsie
     p <- p+theme(plot.title = element_text(size = 12))
     plots[[i]] <- p
 
