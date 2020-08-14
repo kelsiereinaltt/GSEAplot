@@ -140,7 +140,7 @@ GSEAplots= function(input.ds.name="",
 
 
   #plotting and finding leading edge set
-  par(oma=c(0,0,2,0))#kelsie
+  # par(oma=c(0,0,2,0))#kelsie
   plots <- vector(mode="list",length=length(ES.data.files))
   for (i in 1:length(ES.tags.files)){
      dat1_name=paste(wd_new,"/",doc.string,"/",doc.string,".",ES.data.files[[i]],sep="",collapse=NULL)
