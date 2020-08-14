@@ -140,12 +140,11 @@ GSEAplots= function(input.ds.name="",
 
 
   #plotting and finding leading edge set
-  # par(oma=c(0,0,2,0))#kelsie
   plots <- vector(mode="list",length=length(ES.data.files))
   for (i in 1:length(ES.tags.files)){
-     dat1_name=paste(wd_new,"/",doc.string,"/",doc.string,".",ES.data.files[[i]],sep="",collapse=NULL)
-     dat2_name=paste(wd_new,"/",doc.string,"/",doc.string,".",ES.tags.files[[i]],sep="",collapse=NULL)
-     report_name=paste(wd_new,"/",doc.string,"/",doc.string,".",ES.report.files[[i]],sep="",collapse=NULL)
+    dat1_name=paste(wd_new,"/",doc.string,"/",doc.string,".",ES.data.files[[i]],sep="",collapse=NULL)
+    dat2_name=paste(wd_new,"/",doc.string,"/",doc.string,".",ES.tags.files[[i]],sep="",collapse=NULL)
+    report_name=paste(wd_new,"/",doc.string,"/",doc.string,".",ES.report.files[[i]],sep="",collapse=NULL)
     dat1 = read.table(dat1_name,header=T,sep="\t")
     dat2 = read.table(dat2_name,header=T,sep="\t")
     report=read.table(report_name,sep="\t")
@@ -168,7 +167,6 @@ GSEAplots= function(input.ds.name="",
     p <- p+theme_classic()
     p <- p+ylim(window_low,window_high)
     p <- p+ggtitle(gene.set.numbers[[i]])
-    # p <- p+ggtitle(paste(strwrap(gene.set.numbers[[i]], width=0), collapse=""), width = 5) #kelsie
     p <- p+theme(plot.title = element_text(size = 12))
     plots[[i]] <- p
 
