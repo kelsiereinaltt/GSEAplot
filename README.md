@@ -10,7 +10,7 @@ GSEAplot-manual.pdf
 
 ## Installation
 
-remotes::install_github("kelsiereinaltt/GSEAplot")  
+devtools::install_github("kelsiereinaltt/GSEAplot")  
 library(GSEAplot)
 
 ## Authors
