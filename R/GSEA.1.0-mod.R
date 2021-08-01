@@ -562,7 +562,9 @@ GSEA.Res2Frame <- function(filename = "NULL") {
   # A <- ds[1:rows, seq(2, colst, 2)]
   # table1 <- data.frame(A)
   # names(table1) <- header.labels
-  table1=read.table(filename, header=T, sep="\t")
+  print("line565")
+  print(class(filename))
+  table1=read.table(file=filename, header=T, sep="\t")
   return(table1)
 }
 
@@ -996,18 +998,24 @@ GSEA <- function(
   adjust.param <- 0.5
 
   gc()
-
   time1 <- proc.time()
-
+  print("kelsiehi")
   if (is.data.frame(input.ds)) {
     dataset <- input.ds
-  } else {
-    if (regexpr(pattern=".gct", input.ds) == -1) {
-      dataset <- GSEA.Res2Frame(filename = input.ds)
-    } else {
-      #         dataset <- GSEA.Gct2Frame(filename = input.ds)
-      dataset <- GSEA.Gct2Frame2(filename = input.ds)
-    }
+    print("kelsie2")
+    print(input.ds)
+    print(class(input.ds))
+  }else{
+    dataset <- input.ds
+    # if (regexpr(pattern=".gct", input.ds) == -1) {
+    #   print("kelsie1")
+    #   print(input.ds)
+    #   dataset <- GSEA.Res2Frame(filename = input.ds)
+    # } else {
+    #   #         dataset <- GSEA.Gct2Frame(filename = input.ds)
+    #   print("kelsie3")
+    #   dataset <- GSEA.Gct2Frame2(filename = input.ds)
+    # }
   }
   gene.labels <- row.names(dataset)
   sample.names <- names(dataset)
@@ -2431,7 +2439,7 @@ GSEA.Analyze.Sets <- function(
   leading.lists <- NULL
   for (i in 1:max.sets.phen2) {
     inputfile <- paste(directory, set.table.phen2[i, 1], sep="", collapse="")
-    gene.set <- read.table(file=inputfile, sep="\t", header=T, comment.char="", as.is=T)
+    gene.set <- directory(file=inputfile, sep="\t", header=T, comment.char="", as.is=T)
     leading.set <- as.vector(gene.set[gene.set[,"CORE_ENRICHMENT"] == "YES", "SYMBOL"])
     leading.lists <- c(leading.lists, list(leading.set))
     if (i == 1) {

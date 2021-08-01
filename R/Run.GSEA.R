@@ -64,6 +64,8 @@ GSEAplots= function(input.ds.name="",
   if (file.exists(paste0(wd_new,"/", doc.string))==FALSE){
   dir.create(doc.string)
   }
+  print("PRIOR INPUT DS")
+  print(input.ds.name)
   results_new=GSEA(                                                                    # Input/Output Files :-------------------------------------------
                    input.ds=input.ds.name, # Input gene expression Affy dataset file in RES or GCT format
                    input.cls=input.cls.name,
